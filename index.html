@@ -23,16 +23,18 @@
                 font-size: 50px !important;
             }
         }
+
+        .hidden{
+            display:none;
+        }
     </style>
 </head>
 
 <body>
 
-    <h1 id="headerNames">?</h1>
-
     <script>
         "use strict";
-
+        
         const url = new URL(window.location.href);
         const params = new URLSearchParams(url.search);
         const persons = params?.getAll("persons");  
@@ -46,6 +48,9 @@
         let x = 0;
         let intervalHandle = null;
         let start = () => {
+            document.getElementById("headerNames").classList.remove("hidden");
+            document.getElementById("startButton").classList.add("hidden");
+            
             intervalHandle = setInterval(function () {
                 headerNames.textContent = namesList[i++ % namesList.length];
             }, 50);
@@ -71,9 +76,10 @@
                 x++;
             }
         }
-
-        start();
     </script>
+    <button id="startButton" onclick="start()">Iniciar</button>
+    <h1 id="headerNames" class="hidden">?</h1>
+
 </body>
 
 </html>
